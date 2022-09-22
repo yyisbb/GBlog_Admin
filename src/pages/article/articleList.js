@@ -1,4 +1,3 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -19,6 +18,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { Edit, Delete } from '@mui/icons-material';
 import { visuallyHidden } from '@mui/utils';
 import MainCard from '../../components/MainCard';
+import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
 import { getArticleList, deleteArticleByIds } from '../../api/api';
 import { fDateTime } from '../../utils/formatTime';
@@ -221,7 +221,9 @@ export default function ArticleList() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [blogs, SetBlogs] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [count, SetCount] = useState(1);
+    const navigate = useNavigate();
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
@@ -274,7 +276,7 @@ export default function ArticleList() {
             SetBlogs(res.Data);
             SetCount(res.Count);
         });
-    }, []);
+    }, [page]);
 
     const flushCallBack = () => {
         setSelected([]);
@@ -284,12 +286,34 @@ export default function ArticleList() {
             SetCount(res.Count);
         });
     };
+    const editArticle = (id) => {
+        return (e) => {
+            e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
+            navigate('/article/post/', {
+                state: {
+                    id: id
+                }
+            });
+        };
+    };
+
+    const createArticleHandle = () => {
+        navigate('/article/post', {
+            state: {
+                id: 0
+            }
+        });
+    };
 
     return (
         <MainCard title="文章列表">
             <Box sx={{ width: '100%' }}>
-                <Paper sx={{ width: '100%', mb: 2 }}>
+                <Paper sx={{ width: '100%', mb: 1 }}>
                     <EnhancedTableToolbar flushCallBack={flushCallBack} numSelected={selected.length} SelectedIds={selected} />
+                    <Button onClick={createArticleHandle} sx={{ m: 3 }} variant={'contained'} color={'primary'}>
+                        新增文章
+                    </Button>
                     <TableContainer>
                         <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={'medium'}>
                             <EnhancedTableHead
@@ -337,11 +361,7 @@ export default function ArticleList() {
                                                 <TableCell align="right">{blog.watchNum || 0}</TableCell>
                                                 <TableCell align="right">{blog.commentNum || 0}</TableCell>
                                                 <TableCell align="right">
-                                                    <IconButton
-                                                        onClick={() => {
-                                                            alert(1);
-                                                        }}
-                                                    >
+                                                    <IconButton onClick={editArticle(blog.ID)}>
                                                         <Edit />
                                                     </IconButton>
                                                 </TableCell>

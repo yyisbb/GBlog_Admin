@@ -18,6 +18,22 @@ axios.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+// use(两个参数)
+axios.interceptors.response.use(
+    (res) => {
+        // 请求成功对响应数据做处理
+        if (res.data.Code === 10006 || res.data.Code === 10007 || res.data.Code === 10008 || res.data.Code === 10010) {
+            tokenUtil.removeToken();
+        }
+        // 该返回的数据则是axios.then(res)中接收的数据
+        return res;
+    },
+    (err) => {
+        return Promise.reject(err);
+    }
+);
+
 axios.defaults.timeout = 100000;
 axios.defaults.baseURL = 'http://127.0.0.1:9000/v1';
 
