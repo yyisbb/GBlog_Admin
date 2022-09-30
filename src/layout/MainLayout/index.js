@@ -14,9 +14,6 @@ import Breadcrumbs from 'components/@extended/Breadcrumbs';
 
 // types
 import { openDrawer } from 'store/reducers/menu';
-import tokenUtil from '../../utils/tokenUtil';
-import { useNavigate } from 'react-router';
-import messageUtil from '../../utils/messageUtil';
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -33,8 +30,6 @@ const MainLayout = () => {
         setOpen(!open);
         dispatch(openDrawer({ drawerOpen: !open }));
     };
-    const navigate = useNavigate();
-
     // set media wise responsive drawer
     useEffect(() => {
         setOpen(!matchDownLG);
@@ -47,14 +42,6 @@ const MainLayout = () => {
         if (open !== drawerOpen) setOpen(drawerOpen);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [drawerOpen]);
-
-    useEffect(() => {
-        if (!tokenUtil.getToken()) {
-            messageUtil.error({ content: '尚未登录,请登录后操作', duration: 1500 });
-            navigate('/login');
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     return (
         <Box sx={{ display: 'flex', width: '100%' }}>

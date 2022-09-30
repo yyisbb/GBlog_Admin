@@ -108,7 +108,7 @@ function ArticlePost() {
     }, [id]);
 
     return (
-        <MainCard title="文章编辑">
+        <MainCard title={id === 0 ? '创建文章' : '编辑文章'}>
             <Grid container alignItems="center" justifyContent="space-between" rowSpacing={3} columnSpacing={3}>
                 <Grid item xs={12} sm={12} md={12} lg={6}>
                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>

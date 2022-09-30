@@ -71,6 +71,7 @@ function CategoryList() {
     const submitHandle = () => {
         if (name === '' || desc === '' || backGround === '') {
             messageUtil.error({ content: '内容不允许为空', duration: 1500 });
+            return;
         }
         const category = {
             id: updateId,

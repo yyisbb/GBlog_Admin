@@ -35,7 +35,7 @@ axios.interceptors.response.use(
 );
 
 axios.defaults.timeout = 100000;
-axios.defaults.baseURL = 'http://127.0.0.1:9000/v1';
+axios.defaults.baseURL = 'https://api.gravity.wang/v1/';
 
 /**
  * 封装get方法

@@ -10,6 +10,7 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 const ArticlePost = Loadable(lazy(() => import('pages/article/articlePost')));
 const ArticleList = Loadable(lazy(() => import('pages/article/articleList')));
 const CategoryList = Loadable(lazy(() => import('pages/category/categoryList')));
+const Setting = Loadable(lazy(() => import('pages/setting/setting')));
 
 // import Navigate
 import { Navigate } from 'react-router';
@@ -54,6 +55,10 @@ const MainRoutes = {
                     element: <CategoryList />
                 }
             ]
+        },
+        {
+            path: 'setting',
+            element: <Setting />
         }
     ]
 };

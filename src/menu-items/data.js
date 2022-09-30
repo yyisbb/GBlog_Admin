@@ -1,12 +1,13 @@
 // 数据管理模块
 
 // assets
-import { AppleOutlined, AliyunOutlined } from '@ant-design/icons';
+import { UnorderedListOutlined, ZoomOutOutlined, SettingOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
-    AppleOutlined,
-    AliyunOutlined
+    UnorderedListOutlined,
+    ZoomOutOutlined,
+    SettingOutlined
 };
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
@@ -17,18 +18,25 @@ const data = {
     type: 'group',
     children: [
         {
+            id: 'setting',
+            title: '网站设置',
+            type: 'item',
+            url: '/setting',
+            icon: icons.SettingOutlined
+        },
+        {
             id: 'article',
             title: '文章列表',
             type: 'item',
             url: '/article/list',
-            icon: icons.AppleOutlined
+            icon: icons.UnorderedListOutlined
         },
         {
             id: 'category',
             title: '分类管理',
             type: 'item',
             url: '/category/list',
-            icon: icons.AliyunOutlined
+            icon: icons.ZoomOutOutlined
         }
     ]
 };

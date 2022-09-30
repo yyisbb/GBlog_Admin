@@ -96,6 +96,13 @@ function getSetting() {
     return ApiHttp('get', '/getSetting');
 }
 
+/**
+ * 修改个人设置
+ */
+function updateSetting(setting) {
+    return ApiHttp('post', '/admin/updateSetting', setting);
+}
+
 export {
     login,
     getSetting,
@@ -110,5 +117,6 @@ export {
     deleteCategoryByIds,
     getCategoryByID,
     updateCategoryById,
-    createCategory
+    createCategory,
+    updateSetting
 };

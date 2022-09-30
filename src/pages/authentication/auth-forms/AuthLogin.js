@@ -37,12 +37,13 @@ const AuthLogin = () => {
         login(username, password).then((res) => {
             if (res.Code !== 10000) {
                 messageUtil.error({ content: res.Msg, duration: 1500 });
+                setSubmitting(false);
             } else {
                 messageUtil.success({ content: '登录成功', duration: 1500 });
                 tokenUtil.saveToken(res.Data);
+                setSubmitting(false);
                 navigate('/dashboard/index');
             }
-            setSubmitting(false);
         });
     };
 
